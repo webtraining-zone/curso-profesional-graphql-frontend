@@ -1,4 +1,5 @@
 import App, {Container} from 'next/app';
+import PageContainer from '../components/common/PageContainer';
 import '../styles/global.scss';
 
 class LibraryApp extends App {
@@ -7,8 +8,9 @@ class LibraryApp extends App {
 
     return (
         <Container>
-          <h1>Page</h1>
-          <Component/>
+          <PageContainer>
+            <Component/>
+          </PageContainer>
         </Container>
 
     );
