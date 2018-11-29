@@ -1,3 +1,12 @@
-import '../styles/global.scss';
+import React from 'react';
 
-export default () => <div>Welcome to next.js!</div>
+class Home extends React.Component {
+
+  render() {
+    return (<div>
+      <h1>Welcome</h1>
+    </div>);
+  }
+}
+
+export default Home;
