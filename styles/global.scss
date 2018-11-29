@@ -1,3 +1,18 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
 body {
   background: #efefef;
+}
+
+.nav-link {
+  color: white;
+
+  &:hover {
+    color: white;
+    text-decoration: underline;
+  }
+}
+
+.b-header .navbar-light .navbar-brand {
+  color: white;
 }
