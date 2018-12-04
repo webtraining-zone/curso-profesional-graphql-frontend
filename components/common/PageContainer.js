@@ -6,7 +6,7 @@ class PageContainer extends React.Component {
     return (
         <Fragment>
           <Header/>
-          <main>
+          <main className={"b-main"}>
             {this.props.children}
           </main>
         </Fragment>
