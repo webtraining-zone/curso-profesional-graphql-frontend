@@ -6,7 +6,7 @@ class CreateBook extends React.Component {
     return (
         <div className={'container mt-3'}>
           <div className={'b-box b-box--bordered'}>
-            <h1>Create Book</h1>
+            <h1 className={'b-main-title'}>Create Book</h1>
 
 
           </div>

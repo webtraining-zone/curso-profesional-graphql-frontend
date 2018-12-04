@@ -7,7 +7,9 @@ class Header extends React.Component {
         <header className={'b-header'}>
           <nav id="navbar" className="navbar navbar-light bg-primary">
             <div className="container">
-              <a className="navbar-brand" href="#">Library</a>
+              <Link href="/">
+                <a className="navbar-brand" href="#">Library</a>
+              </Link>
               <ul className="nav nav-pills">
                 <li className="nav-item">
                   <Link href="/books">

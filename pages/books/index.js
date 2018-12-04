@@ -18,7 +18,7 @@ class BooksIndex extends React.Component {
     return (
         <div className={'container mt-3'}>
           <div className={'b-box b-box--bordered'}>
-            <h1>Books</h1>
+            <h1 className={"b-main-title"}>Selected Books</h1>
 
             {/*Render props*/}
             <Query query={ALL_BOOKS_QUERY}>
@@ -27,10 +27,15 @@ class BooksIndex extends React.Component {
                 if (error) return <div className={'alert alert-danger'}>Error</div>;
 
                 return (
-                    <div className={'b-books'}>
+                    <div className={'row'}>
                       {data.books.map(book => (
-                              <div className={'b-book'} key={book.id}>
-                                {book.title}
+                              <div className={'col-6 col-sm-4 col-md-2'} key={book.id}>
+                                <div className={'b-book mb-4'}>
+                                  <div className={'b-book__thumbnail'}>
+                                    <img src={book.thumbnail} alt={book.title} className={'img-fluid'}/>
+                                  </div>
+                                  {/*<h4>{book.title}</h4>*/}
+                                </div>
                               </div>
                           ),
                       )}

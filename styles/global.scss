@@ -5,6 +5,15 @@ body {
   color: #777;
 }
 
+h1,
+.b-main-title {
+  font-size: 1.5em;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
 .nav-link {
   color: white;
 
