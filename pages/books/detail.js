@@ -1,14 +1,13 @@
 import React from 'react';
-// import Router from 'next/router';
 
 import {Query} from 'react-apollo';
 import gql from 'graphql-tag';
 
 const ONE_BOOK_QUERY = gql`
-    query ONE_BOOK_QUERY {
+    query ONE_BOOK_QUERY($id: ID!) {
 
         book (where: {
-            id:"cjp905y67eo2j0a62p8qtrp3j"
+            id: $id
         }) {
             id
             title
@@ -21,22 +20,23 @@ const ONE_BOOK_QUERY = gql`
 
 class BookDetail extends React.Component {
 
-  // static async getInitialProps() {
-  //   // Add some delay
-  //
-  //   await new Promise((resolve) => {
-  //     console.log(Router.pathname);
-  //     setTimeout(resolve, 3000);
-  //   });
-  //   return {};
-  // }
+  // This runs before renders and sets the "id" from the query string
+  // Don't get confused "query" is the "query string" NOT a GraphQL query
+  static async getInitialProps({query}) {
+    return {
+      id: query.id,
+    };
+  }
 
   render() {
+
+    const {id} = this.props;
+
     return (
 
         <div className={'container mt-3'}>
           <div className={'b-box b-box--bordered'}>
-            <Query query={ONE_BOOK_QUERY}>
+            <Query query={ONE_BOOK_QUERY} variables={{id}}>
               {({data, error, loading}) => {
 
                 if (error) return <div className={'alert alert-danger'}>Error</div>;
