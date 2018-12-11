@@ -24,7 +24,7 @@ class Home extends React.Component {
                         GraphQL y Node.js</a>, si te gustaría aprender cómo crearla completamente
                       desde cero, te
                       invitamos a <a
-                          href="https://webtraining.zone/cursos/curso-de-creacion-de-apis-con-graphql-y-nodejs/1"
+                          href="https://webtraining.zone/aportacion/curso-de-creacion-de-apis-con-graphql-y-nodejs/1"
                           target="_blank" rel="noopener noreferrer">adquirir este curso en este
                         enlace</a>.
                     </div>
