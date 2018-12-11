@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next -p 8085",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 4400",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
