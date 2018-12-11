@@ -5,10 +5,23 @@ import withApolloConfig from './../components/apollo/withApolloConfig';
 
 import '../styles/global.scss';
 
+// Loading
+import NProgress from 'nprogress';
+import Router from 'next/router';
+
+Router.events.on('routeChangeStart', (url) => {
+  console.log(`Loading: ${url}`);
+  NProgress.start();
+});
+Router.events.on('routeChangeComplete', () => NProgress.done());
+Router.events.on('routeChangeError', () => NProgress.done());
+
+//
+
 class LibraryApp extends App {
 
   // Next.js Lifecycle (runs before render())
-  static async getInitialProps({Component, ctx}) {
+  static async getInitialProps({Component, router, ctx}) {
     let pageProps = {};
 
     if (Component.getInitialProps) {
@@ -25,11 +38,13 @@ class LibraryApp extends App {
 
     return (
         <Container>
-          <ApolloProvider client={apollo}>
-            <PageContainer>
-              <Component {...pageProps}/>
-            </PageContainer>
-          </ApolloProvider>
+          <div style={{marginBottom: 20}}>
+            <ApolloProvider client={apollo}>
+              <PageContainer>
+                <Component {...pageProps}/>
+              </PageContainer>
+            </ApolloProvider>
+          </div>
         </Container>
     );
   }
