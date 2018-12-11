@@ -1,6 +1,10 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "variables";
 
+html {
+  //background: $main-color-dark;
+}
+
 body {
   background: $bg-color !important;
   color: $text-color;
@@ -50,4 +54,17 @@ h1,
 
 .b-image-container {
   background: $main-color-dark;
+}
+
+.b-footer {
+  color: white;
+
+  a {
+    color: white;
+    text-decoration: underline;
+
+    &:hover {
+      color: $main-color;
+    }
+  }
 }

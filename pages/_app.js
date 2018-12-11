@@ -15,7 +15,6 @@ Router.events.on('routeChangeStart', (url) => {
 });
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
-
 //
 
 class LibraryApp extends App {
@@ -38,13 +37,11 @@ class LibraryApp extends App {
 
     return (
         <Container>
-          <div style={{marginBottom: 20}}>
-            <ApolloProvider client={apollo}>
-              <PageContainer>
-                <Component {...pageProps}/>
-              </PageContainer>
-            </ApolloProvider>
-          </div>
+          <ApolloProvider client={apollo}>
+            <PageContainer>
+              <Component {...pageProps}/>
+            </PageContainer>
+          </ApolloProvider>
         </Container>
     );
   }
