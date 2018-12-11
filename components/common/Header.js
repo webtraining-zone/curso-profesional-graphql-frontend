@@ -5,10 +5,14 @@ class Header extends React.Component {
   render() {
     return (
         <header className={'b-header'}>
-          <nav id="navbar" className="navbar navbar-light bg-primary">
+          <nav id="navbar" className="navbar navbar-light">
             <div className="container">
               <Link href="/">
-                <a className="navbar-brand" href="#">Library</a>
+                <a className="navbar-brand" href="#">
+                  <img src="/static/images/logo.svg" alt="GraphLib"
+                       className="text-center img-fluid" width="32"/>
+                  <span className="ml-2 d-inline-block">GraphyLib</span>
+                </a>
               </Link>
               <ul className="nav nav-pills">
                 <li className="nav-item">

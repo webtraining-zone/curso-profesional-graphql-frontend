@@ -1,8 +1,9 @@
 @import "~bootstrap/dist/css/bootstrap.css";
+@import "variables";
 
 body {
-  background: #eff3f6 !important;
-  color: #777;
+  background: $bg-color !important;
+  color: $text-color;
 }
 
 h1,
@@ -23,8 +24,17 @@ h1,
   }
 }
 
+.b-header .navbar-light {
+  background: $main-color;
+}
+
 .b-header .navbar-light .navbar-brand {
   color: white;
+
+  &:hover,
+  &:focus {
+    color: white;
+  }
 }
 
 .b-box {
@@ -36,4 +46,8 @@ h1,
   padding: 20px;
   border-radius: 3px;
   box-shadow: 0 1px 3px 0 rgba(63, 63, 68, 0.15), 0 0 0 1px rgba(63, 63, 68, 0.05);
+}
+
+.b-image-container {
+  background: $main-color-dark;
 }
