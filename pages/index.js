@@ -31,7 +31,7 @@ class Home extends React.Component {
                   </div>
                   <div className="embed-responsive embed-responsive-16by9 mb-5">
                     <iframe
-                        src="https://player.vimeo.com/video/305567763?title=0&autoplay=1&app_id=122963"
+                        src="https://player.vimeo.com/video/305567763?title=0&app_id=122963"
                         width="640"
                         height="360" frameBorder="0" allowFullScreen=""
                         className="embed-responsive-item mb -5"></iframe>
