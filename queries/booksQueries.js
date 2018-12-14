@@ -32,4 +32,11 @@ export const CREATE_BOOK_MUTATION = gql`
     }
 `;
 
+export const DELETE_BOOK_MUTATION = gql`
+    mutation DELETE_BOOK_MUTATION($id: ID!) {
+        deleteBook(id: $id) {
+            id
+        }
+    }
 
+`;

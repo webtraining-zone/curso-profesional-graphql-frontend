@@ -1,16 +1,6 @@
 import React from 'react';
 import {Mutation} from 'react-apollo';
-import gql from 'graphql-tag';
-import {ALL_BOOKS_QUERY} from '../../queries/booksQueries';
-
-const DELETE_BOOK_MUTATION = gql`
-    mutation DELETE_BOOK_MUTATION($id: ID!) {
-        deleteBook(id: $id) {
-            id
-        }
-    }
-
-`;
+import {ALL_BOOKS_QUERY, DELETE_BOOK_MUTATION} from '../../queries/booksQueries';
 
 class DeleteBook extends React.Component {
 
