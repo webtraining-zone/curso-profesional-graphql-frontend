@@ -1,22 +1,8 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 
 import {Query} from 'react-apollo';
-import gql from 'graphql-tag';
-
-const ONE_BOOK_QUERY = gql`
-    query ONE_BOOK_QUERY($id: ID!) {
-
-        book (where: {
-            id: $id
-        }) {
-            id
-            title
-            description
-            image
-        }
-
-    }
-`;
+import {ONE_BOOK_QUERY} from '../../queries/booksQueries';
+import Head from 'next/head'
 
 class BookDetail extends React.Component {
 
@@ -47,22 +33,27 @@ class BookDetail extends React.Component {
                 const {book} = data;
 
                 return (
-                    <div className={'b-book'}>
-                      <div className="row">
-                        <div className="col-4 col-sm-4 col-md-3">
-                          <img src={book.image} alt={book.title} className={'img-fluid'}/>
-                        </div>
+                    <Fragment>
+                      <Head>
+                        <title>GraphyLib | {book.title}</title>
+                      </Head>
+                      <div className={'b-book'}>
+                        <div className="row">
+                          <div className="col-4 col-sm-4 col-md-3">
+                            <img src={book.image} alt={book.title} className={'img-fluid'}/>
+                          </div>
 
-                        <div className="col-8 col-sm-8 col-md-9">
-                          <h1 className={'b-main-title'}>{book.title}</h1>
-                          <div className="b-book__description">
-                            {book.description}
+                          <div className="col-8 col-sm-8 col-md-9">
+                            <h1 className={'b-main-title'}>{book.title}</h1>
+                            <div className="b-book__description">
+                              {book.description}
+                            </div>
                           </div>
                         </div>
+
+
                       </div>
-
-
-                    </div>
+                    </Fragment>
                 );
 
               }}

@@ -2,6 +2,7 @@ import React from 'react';
 import {Mutation} from 'react-apollo';
 import Router from 'next/router';
 import {ALL_BOOKS_QUERY, CREATE_BOOK_MUTATION} from '../../queries/booksQueries';
+import Head from 'next/head';
 
 class CreateBook extends React.Component {
 
@@ -49,61 +50,67 @@ class CreateBook extends React.Component {
 
   render() {
     return (
-        <div className={'container mt-3'}>
-          <div className={'b-box b-box--bordered'}>
+        <>
+          <Head>
+            <title>GraphyLib | Create Book</title>
+          </Head>
+          <div className={'container mt-3'}>
+            <div className={'b-box b-box--bordered'}>
 
-            <h1 className={'b-main-title'}>Create Book</h1>
+              <h1 className={'b-main-title'}>Create Book</h1>
 
-            <div className="row">
-              <div className="col-12 col-sm-8 col-md-6">
+              <div className="row">
+                <div className="col-12 col-sm-8 col-md-6">
 
-                <div className="b-form">
+                  <div className="b-form">
 
-                  <Mutation mutation={CREATE_BOOK_MUTATION} variables={this.state}
-                            update={this.updateCache}>
-                    {(createBook, {loading, error}) => (
-                        <div>
-                          {loading && <p>Loading...</p>}
+                    <Mutation mutation={CREATE_BOOK_MUTATION} variables={this.state}
+                              update={this.updateCache}>
+                      {(createBook, {loading, error}) => (
+                          <div>
+                            {loading && <p>Loading...</p>}
 
-                          {error && <p>Error :( Please try again</p>}
+                            {error && <p>Error :( Please try again</p>}
 
-                          <form onSubmit={async (event) => {
-                            event.preventDefault();
-                            const response = await createBook();
-                            console.log('>> Book created: ', response);
-                            // this.redirectToDetailBookPage(response.data.createBook.id);
-                          }}>
+                            <form onSubmit={async (event) => {
+                              event.preventDefault();
+                              const response = await createBook();
+                              console.log('>> Book created: ', response);
+                              // this.redirectToDetailBookPage(response.data.createBook.id);
+                            }}>
 
-                            <div className="form-group">
-                              <label htmlFor="name">Title* :</label>
-                              <input id="title" name="title" className="form-control"
-                                     type="text" required onChange={this.handleOnChange}
-                                     defaultValue={this.state.title}/>
-                            </div>
+                              <div className="form-group">
+                                <label htmlFor="name">Title* :</label>
+                                <input id="title" name="title" className="form-control"
+                                       type="text" required onChange={this.handleOnChange}
+                                       defaultValue={this.state.title}/>
+                              </div>
 
-                            <div className="form-group">
-                              <label htmlFor="description">Description:</label>
-                              <textarea id="description" name="description" className="form-control"
-                                        rows="8"
-                                        onChange={this.handleOnChange}
-                                        defaultValue={this.state.description}/>
-                            </div>
+                              <div className="form-group">
+                                <label htmlFor="description">Description:</label>
+                                <textarea id="description" name="description"
+                                          className="form-control"
+                                          rows="8"
+                                          onChange={this.handleOnChange}
+                                          defaultValue={this.state.description}/>
+                              </div>
 
-                            <button type="submit" className="btn btn-primary">Submit
-                            </button>
-                          </form>
-                        </div>
-                    )}
-                  </Mutation>
+                              <button type="submit" className="btn btn-primary">Submit
+                              </button>
+                            </form>
+                          </div>
+                      )}
+                    </Mutation>
 
+
+                  </div>
 
                 </div>
-
               </div>
-            </div>
 
+            </div>
           </div>
-        </div>);
+        </>);
   }
 }
 

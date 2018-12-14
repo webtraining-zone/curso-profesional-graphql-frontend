@@ -10,6 +10,21 @@ export const ALL_BOOKS_QUERY = gql`
     }
 `;
 
+export const ONE_BOOK_QUERY = gql`
+    query ONE_BOOK_QUERY($id: ID!) {
+
+        book (where: {
+            id: $id
+        }) {
+            id
+            title
+            description
+            image
+        }
+
+    }
+`;
+
 export const CREATE_BOOK_MUTATION = gql`
     mutation CREATE_BOOK_MUTATION(
     $title: String!
