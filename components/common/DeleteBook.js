@@ -20,13 +20,15 @@ class DeleteBook extends React.Component {
         <Mutation mutation={DELETE_BOOK_MUTATION} variables={{id: this.props.id}}
                   update={this.updateCache}>
           {(deleteBook, {error, loading}) => (
-              <button className={'btn btn-danger'} onClick={() => {
-                if (confirm('Are you sure you want to delete this item?')) {
-                  deleteBook();
-                }
-              }}>
-                {this.props.children}
-              </button>
+              <div className={'b-button-container'}>
+                <button className={'btn btn-danger'} onClick={() => {
+                  if (confirm('Are you sure you want to delete this item?')) {
+                    deleteBook();
+                  }
+                }}>
+                  {this.props.children}
+                </button>
+              </div>
           )}
         </Mutation>
     );
