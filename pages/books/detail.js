@@ -1,8 +1,10 @@
 import React, {Fragment} from 'react';
 
+import Router from 'next/router';
+
 import {Query} from 'react-apollo';
 import {ONE_BOOK_QUERY} from '../../queries/booksQueries';
-import Head from 'next/head'
+import Head from 'next/head';
 
 class BookDetail extends React.Component {
 
@@ -14,6 +16,10 @@ class BookDetail extends React.Component {
     };
   }
 
+  goBack() {
+    Router.back();
+  }
+
   render() {
 
     const {id} = this.props;
@@ -22,6 +28,10 @@ class BookDetail extends React.Component {
 
         <div className={'container mt-3'}>
           <div className={'b-box b-box--bordered'}>
+            <a href="#" onClick={this.goBack} className="btn btn-secondary mt-3 mb-3">
+              <i className="fas fa-hand-point-left"></i> Go back
+            </a>
+
             <Query query={ONE_BOOK_QUERY} variables={{id}}>
               {({data, error, loading}) => {
 

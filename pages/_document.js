@@ -12,6 +12,9 @@ export default class MyDocument extends Document {
         <Head>
           {/* Import CSS for nprogress */}
           <link rel='stylesheet' type='text/css' href='/static/css/nprogress.css'/>
+          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+                integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+                crossOrigin="anonymous"/>
         </Head>
         <body>
           <Main/>
