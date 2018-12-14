@@ -1,17 +1,8 @@
 import React from 'react';
 import Router from 'next/router';
 import {Query} from 'react-apollo';
-import gql from 'graphql-tag';
-
-const ALL_BOOKS_QUERY = gql`
-    query ALL_BOOKS_QUERY {
-        books {
-            id
-            title
-            thumbnail
-        }
-    }
-`;
+import {ALL_BOOKS_QUERY} from '../../queries/booksQueries';
+import DeleteBook from '../../components/common/DeleteBook';
 
 class BooksIndex extends React.Component {
 
@@ -30,8 +21,8 @@ class BooksIndex extends React.Component {
             <Query query={ALL_BOOKS_QUERY}>
               {({data, error, loading}) => {
 
-                if (error) return <div className={'alert alert-danger'}>Error</div>;
                 if (loading) return <div>Loading...</div>;
+                if (error) return <div className={'alert alert-danger'}>Error</div>;
 
                 console.log(data);
 
@@ -47,6 +38,7 @@ class BooksIndex extends React.Component {
                                     </a>
                                   </div>
                                   {/*<h4>{book.title}</h4>*/}
+                                  <DeleteBook id={book.id}>x</DeleteBook>
                                 </div>
                               </div>
                           ),

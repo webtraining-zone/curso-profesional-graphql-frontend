@@ -1,28 +1,16 @@
 import React from 'react';
 import {Mutation} from 'react-apollo';
-import gql from 'graphql-tag';
 import Router from 'next/router';
-
-const CREATE_BOOK_MUTATION = gql`
-    mutation CREATE_BOOK_MUTATION(
-    $title: String!
-    $description: String
-    ) {
-        createBook(
-            title: $title
-            description: $description
-        ) {
-            id
-            title
-        }
-    }
-`;
+import {ALL_BOOKS_QUERY, CREATE_BOOK_MUTATION} from '../../queries/booksQueries';
 
 class CreateBook extends React.Component {
 
+  // Let's define some default values
   state = {
-    title: '',
-    description: '',
+    title: 'This is a new book',
+    description: 'This is a description',
+    thumbnail: 'http://graphql-backend.webtraining.fun/images/javascript-design-patterns.jpg',
+    image: 'http://graphql-backend.webtraining.fun/images/javascript-design-patterns.jpg',
   };
 
   handleOnChange = (event) => {
@@ -37,6 +25,28 @@ class CreateBook extends React.Component {
     });
   };
 
+  updateCache = (cache, payload) => {
+
+    // Read more why we are setting this validation
+    // https://github.com/apollographql/apollo-client/issues/1701#issuecomment-380213533
+    // We only update the cache if THERE is cache, but if you land in this "create new book page" no cache will exist!!!
+    if (cache.data.data.ROOT_QUERY) {
+      // Update the cache here!!!
+      // ROOT_QUERY is inside the data that is inside the cache
+      // You can now update the cache here!!!!!
+
+      const data = cache.readQuery({query: ALL_BOOKS_QUERY});
+
+      console.log('>> updateCache() > BEFORE > ', data, ' --> Payload > ', payload);
+
+      // Insert the "new" book into the cache
+      data.books = data.books.concat([payload.data.createBook]);
+      console.log('>> updateCache() > AFTER > ', data, typeof data);
+      cache.writeQuery({query: ALL_BOOKS_QUERY, data});
+    }
+
+  };
+
   render() {
     return (
         <div className={'container mt-3'}>
@@ -49,31 +59,40 @@ class CreateBook extends React.Component {
 
                 <div className="b-form">
 
-                  <Mutation mutation={CREATE_BOOK_MUTATION} variables={this.state}>
+                  <Mutation mutation={CREATE_BOOK_MUTATION} variables={this.state}
+                            update={this.updateCache}>
                     {(createBook, {loading, error}) => (
-                        <form onSubmit={async (event) => {
-                          event.preventDefault();
-                          const response = await createBook();
-                          console.log('>> Book created: ', response);
-                          this.redirectToDetailBookPage(response.data.createBook.id);
-                        }}>
+                        <div>
+                          {loading && <p>Loading...</p>}
 
-                          <div className="form-group">
-                            <label htmlFor="name">Title* :</label>
-                            <input id="title" name="title" className="form-control"
-                                   type="text" required onChange={this.handleOnChange}/>
-                          </div>
+                          {error && <p>Error :( Please try again</p>}
 
-                          <div className="form-group">
-                            <label htmlFor="description">Description:</label>
-                            <textarea id="description" name="description" className="form-control"
-                                      rows="8"
-                                      onChange={this.handleOnChange}></textarea>
-                          </div>
+                          <form onSubmit={async (event) => {
+                            event.preventDefault();
+                            const response = await createBook();
+                            console.log('>> Book created: ', response);
+                            // this.redirectToDetailBookPage(response.data.createBook.id);
+                          }}>
 
-                          <button type="submit" className="btn btn-primary">Submit
-                          </button>
-                        </form>
+                            <div className="form-group">
+                              <label htmlFor="name">Title* :</label>
+                              <input id="title" name="title" className="form-control"
+                                     type="text" required onChange={this.handleOnChange}
+                                     defaultValue={this.state.title}/>
+                            </div>
+
+                            <div className="form-group">
+                              <label htmlFor="description">Description:</label>
+                              <textarea id="description" name="description" className="form-control"
+                                        rows="8"
+                                        onChange={this.handleOnChange}
+                                        defaultValue={this.state.description}/>
+                            </div>
+
+                            <button type="submit" className="btn btn-primary">Submit
+                            </button>
+                          </form>
+                        </div>
                     )}
                   </Mutation>
 
