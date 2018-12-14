@@ -5,6 +5,7 @@ import CONFIG from './../../config/api';
 const createApolloClient = ({headers}) => {
   return new ApolloClient({
     uri: CONFIG.serverURL,
+    // This is a sort of middleware, than runs for every single request
     request: (operation) => {
       operation.setContext({
         fetchOptions: {
